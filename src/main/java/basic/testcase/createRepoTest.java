@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentTest;
@@ -23,12 +24,12 @@ import utility.payloadGenerator;
 public class createRepoTest {
 	
 	Response response;
-	ObjectMapper objectMapper;
+	ObjectMapper objectMapper; 
 	String endPoint = createURL.getBaseURI("/user/repos");
 	String bearer_Token = Authn.getBearerToken();
 	
 	
-	@Test
+	@Test(priority=1)
 	public void createRepositoryTestCase() throws IOException {
 		RestFWLogger.initLogger();
 		RestFWLogger.startTestCase("createRepositoryTestCase");
@@ -50,27 +51,28 @@ public class createRepoTest {
 		RestFWLogger.endTestCase();
 	}
 	
-	@Test
-	public void deleteRepo() throws IOException {
+	@DataProvider(name = "test1")
+	   public static Object[][] primeNumbers() {
+	      return new Object[][] {{"Api-testing-restcall-8"}, {"Api-testing-restcall-9"}};
+	   }
+	
+	@Test(dataProvider = "test1",priority=2)
+	public void GetRepo(String RepoName) throws IOException {
 		PropertyConfigurator.configure("log4j.properties");
-		RestFWLogger.startTestCase("deleteRepoPOJO");
-		RestFWLogger.info("Starting Delete Repo Test from POJO Request");
-		
-		CreateRepoPOJO requestPayload = new CreateRepoPOJO();
-		requestPayload.setName("Api-testing-restcall-8");
-		requestPayload.setDescription("Repository created via Rest Assured Test 1");
-		
-		objectMapper = new ObjectMapper();
-		String payload = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(requestPayload);
-		RestFWLogger.info("Request Payload - " + payload);
-		
-		String deleteEndPoint = createURL.getBaseURI("/repos/paragpatil7/") + requestPayload.getName();
-		RestFWLogger.info(deleteEndPoint);
-		response = BaseClass.deleteRequest(deleteEndPoint, bearer_Token);
-		Assert.assertEquals(CommonUtilFunctions.getStatusCode(response), 204);
+		RestFWLogger.startTestCase("GetRepo");
+		RestFWLogger.info("Starting Get Repo Test for Repo "+RepoName);
+		String GetRepoEndPoint = createURL.getBaseURI("/repos/paragpatil7/") + RepoName;
+		RestFWLogger.info(GetRepoEndPoint);
+		RestFWLogger.info("Executing Get repo API");
+		response = BaseClass.getRequest(GetRepoEndPoint, bearer_Token);
+		Assert.assertEquals(CommonUtilFunctions.getStatusCode(response), 200);
 		RestFWLogger.info(CommonUtilFunctions.getStatusMessage(response));
+		RestFWLogger.info("Assertion on Get Repo Done....");
 		RestFWLogger.endTestCase();
 	}
+	
+	
+	
 
 	
 	
