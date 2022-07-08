@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-07-08T15:59:26 IST" name="Suite" finished-at="2022-07-08T15:59:33 IST" duration-ms="7248">
+    <groups>
+    </groups>
+    <test started-at="2022-07-08T15:59:26 IST" name="Test" finished-at="2022-07-08T15:59:33 IST" duration-ms="7248">
+      <class name="basic.testcase.createRepoTest">
+        <test-method signature="createRepositoryTestCase()[pri:0, instance:basic.testcase.createRepoTest@3754a4bf]" started-at="2022-07-08T15:59:26 IST" name="createRepositoryTestCase" finished-at="2022-07-08T15:59:32 IST" duration-ms="6224" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createRepositoryTestCase -->
+        <test-method signature="deleteRepoPOJO()[pri:0, instance:basic.testcase.createRepoTest@3754a4bf]" started-at="2022-07-08T15:59:32 IST" name="deleteRepoPOJO" finished-at="2022-07-08T15:59:33 IST" duration-ms="951" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteRepoPOJO -->
+      </class> <!-- basic.testcase.createRepoTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
