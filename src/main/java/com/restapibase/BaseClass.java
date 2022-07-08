@@ -20,6 +20,18 @@ public class BaseClass {
 		return response;
 	}
 
+	public static Response getRequest(String requestURI, String bearer_token) {
+		RestFWLogger.initLogger();
+		RestFWLogger.info("Request URI is - " + requestURI);
+		RequestSpecification requestSpecification = RestAssured.given();
+		requestSpecification.contentType(ContentType.JSON);
+		requestSpecification.header("Authorization", "Bearer " + bearer_token);
+		Response response = requestSpecification.get(requestURI);
+		RestFWLogger.info("Request Response is - " + response.getBody().asString());
+		return response;
+	}
+
+	
 	public static Response postRequest(String requestURI, String requestPayLoad) {
 		RestFWLogger.initLogger();
 		RestFWLogger.info("Request URI is - " + requestURI);
